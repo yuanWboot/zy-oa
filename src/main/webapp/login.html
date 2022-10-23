@@ -14,7 +14,23 @@
 </head>
 <body>
 <div id="app">
+    <el-form ref="loginForm" lable-width="80px" class="login-box">
+
+    </el-form>
 
 </div>
+<script>
+    const Main = {
+        data() {
+            return{
+
+            }
+        }
+    };
+    //初始化Vue,绑定Main中的数据,利用ElementPlus对#app容器进行重新渲染
+    const app = Vue.createApp(Main);
+    app.use(ElementPlus);
+    app.mount("#app");
+</script>
 </body>
 </html>
