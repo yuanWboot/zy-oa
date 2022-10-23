@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="zy-oa:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/zy_oa_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="zy-oa/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="zy-oa" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
