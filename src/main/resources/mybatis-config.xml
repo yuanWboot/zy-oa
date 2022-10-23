@@ -19,4 +19,7 @@
             </dataSource>
         </environment>
     </environments>
+    <mappers>
+        <mapper resource="mapper/test.xml"></mapper>
+    </mappers>
 </configuration>
