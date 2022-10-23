@@ -30,16 +30,16 @@
 </head>
 <body>
 <div id="app">
-    <el-form ref="loginForm" label-width="80px" :model="form" class="login-box">
+    <el-form ref="loginForm" label-width="80px" :rules="rules" :model="form" class="login-box">
         <h2 class="login-title">OA办公系统</h2>
-        <el-form-item label="账号">
+        <el-form-item label="账号" prop="username">
             <el-input type="text" placeholder="请输入账号" v-model="form.username"></el-input>
         </el-form-item>
-        <el-form-item label="密码">
-            <el-input type="passeord" placeholder="请输入密码" v-model="form.password"></el-input>
+        <el-form-item label="密码" prop="password">
+            <el-input type="password" placeholder="请输入密码" v-model="form.password"></el-input>
         </el-form-item>
         <el-form-item>
-            <el-button type="primary" style="width: 200px">登录</el-button>
+            <el-button type="primary" v-on:click="onsubmit('loginForm')" style="width: 200px">登录</el-button>
         </el-form-item>
 
     </el-form>
@@ -50,9 +50,27 @@
         data() {
             return {
                 form: {
-                    username : '123'
-                    ,password: '123'
+                    username : ''
+                    ,password: ''
                 }
+                ,rules:{
+                    username: [
+                        {required: true,message : '账号不能为空', trigger:'blur'}
+                    ],
+                    password: [
+                        {required: true,message : '密码不能为空', trigger:'blur'}
+                    ]
+                }
+            }
+            }
+        ,methods: {
+            onSubmit(formName){
+                const form = this.$refs[formName];
+                form.validate((valid) => {
+                    if (valid) {
+                        console.info("表单检验成功，准备提交数据");
+                    }
+                })
             }
         }
     };
