@@ -25,7 +25,13 @@
 </head>
 <body>
 <div id="app">
-    <el-form ref="loginForm" lable-width="80px" class="login-box">
+    <el-form ref="loginForm" label-width="80px" :model="form" class="login-box">
+        <el-form-item label="账号">
+            <el-input type="text" placeholder="请输入账号" v-model="form.username"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+            <el-input type="passeord" placeholder="请输入密码" v-model="form.password"></el-input>
+        </el-form-item>
 
     </el-form>
 
@@ -33,7 +39,12 @@
 <script>
     const Main = {
         data() {
-            return {}
+            return {
+                form: {
+                    username : '123'
+                    ,password: '123'
+                }
+            }
         }
     };
     //初始化Vue,绑定Main中的数据,利用ElementPlus对#app容器进行重新渲染
