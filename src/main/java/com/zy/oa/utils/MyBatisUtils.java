@@ -18,7 +18,7 @@ public class MyBatisUtils {
         Reader reader = null;
         try {
             //读取mybatis-config.xml
-            reader = Resources.getResourceAsReader("mybatis.config.xml");
+            reader = Resources.getResourceAsReader("mybatis-config.xml");
             //构建sqlSessionFactory
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
         } catch (IOException e) {
