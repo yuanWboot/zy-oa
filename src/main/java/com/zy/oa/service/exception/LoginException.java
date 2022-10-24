@@ -1,4 +1,4 @@
-package com.zy.oa.mapper.exception;
+package com.zy.oa.service.exception;
 
 public class LoginException extends RuntimeException{
     public LoginException(String message){
