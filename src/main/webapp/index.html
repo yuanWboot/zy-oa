@@ -9,9 +9,35 @@
     <script src="/assets/vue/vue.global.js"></script>
     <script src="/assets/element-plus/index.full.js"></script>
     <script src="/assets/axios/axios.js"></script>
+    <style>
+        .el-header{
+            background-color: rgb(238,241,246);
+            color: #333;
+            line-height: 60px;
+        }
+        html,body,#app,.el-container{
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            max-height: 100%;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
+    <el-container style="width: 100%;border: 1px solid #eee">
+        <el-header>
+            这是后台首页头部
+        </el-header>
+        <el-container>
+            <el-aside width="200px" style="max-height: 100%;background: rgb(238,241,246)">
+                这是功能区
+            </el-aside>
+            <el-main>
+                页面显示区
+            </el-main>
+        </el-container>
+    </el-container>
 
 </div>
 <script>
