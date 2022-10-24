@@ -2,6 +2,7 @@ package com.zy.oa.controller;
 
 import com.zy.oa.entity.Node;
 import com.zy.oa.service.RbacService;
+import com.zy.oa.utils.ResponseUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,6 +45,11 @@ public class UserInfoServlet extends HttpServlet {
                 children.add(node);
             }
         }
+        //转换成json数据结构
+        String json = new ResponseUtils().put("nodeList", treeList).toJsonString();
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().println(json);
+
     }
 
     @Override
