@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @WebServlet("api/login")
 public class LoginServlet extends HttpServlet {
@@ -28,10 +30,17 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         //调用业务逻辑
+        Map result = new LinkedHashMap<>();
         try {
             User user = userService.checkLogin(username, password);
+            //处理结果编码，0代表成功，非零处理代表失败
+            result.put("code",0);
+            result.put("message","success");
         } catch (LoginException e) {
             e.printStackTrace();
+            //处理失败返回异常类名和错误提示信息
+            result.put("code",e.getClass().getSimpleName());
+            result.put("message",e.getMessage());
         }
         //返回json结果
     }
