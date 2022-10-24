@@ -2,7 +2,7 @@ package com.zy.oa.entity;
 
 public class Node {
     private Long nodeId;  //节点编号
-    private Integer nodeTyp;  //节点类型 1-模块 2-功能
+    private Integer nodeType;  //节点类型 1-模块 2-功能
     private String nodeName ; //节点名称
     private String url ;      //功能地址
     private Integer nodeCode; //节点编码，用于排序
@@ -16,12 +16,12 @@ public class Node {
         this.nodeId = nodeId;
     }
 
-    public Integer getNodeTyp() {
-        return nodeTyp;
+    public Integer getNodeType() {
+        return nodeType;
     }
 
-    public void setNodeTyp(Integer nodeTyp) {
-        this.nodeTyp = nodeTyp;
+    public void setNodeType(Integer nodeTyp) {
+        this.nodeType = nodeTyp;
     }
 
     public String getNodeName() {
@@ -55,4 +55,6 @@ public class Node {
     public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
+
+
 }
