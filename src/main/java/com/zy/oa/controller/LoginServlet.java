@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@WebServlet("api/login")
+@WebServlet("/api/login")
 public class LoginServlet extends HttpServlet {
     private UserService userService  = new UserService();
     @Override
@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
             //处理结果编码，0代表成功，非零处理代表失败
             result.put("code",0);
             result.put("message","success");
-        } catch (LoginException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             //处理失败返回异常类名和错误提示信息
             result.put("code",e.getClass().getSimpleName());
