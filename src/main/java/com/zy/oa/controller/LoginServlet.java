@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zy.oa.entity.User;
 import com.zy.oa.service.UserService;
+import com.zy.oa.utils.ResponseUtils;
 
 import javax.security.auth.login.LoginException;
 import javax.servlet.ServletException;
@@ -32,22 +33,27 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         //调用业务逻辑
-        Map result = new LinkedHashMap<>();
+      //  Map result = new LinkedHashMap<>();
+        ResponseUtils resp = null;
         try {
             User user = userService.checkLogin(username, password);
             //处理结果编码，0代表成功，非零处理代表失败
-            result.put("code",0);
-            result.put("message","success");
+            resp = new ResponseUtils().put("user",user);
+//            result.put("code",0);
+//            result.put("message","success");
         } catch (Exception e) {
             e.printStackTrace();
             //处理失败返回异常类名和错误提示信息
-            result.put("code",e.getClass().getSimpleName());
-            result.put("message",e.getMessage());
+            resp = new ResponseUtils(e.getClass().getSimpleName(),e.getMessage());
+//            result.put("code",e.getClass().getSimpleName());
+//            result.put("message",e.getMessage());
+
         }
         //返回json结果
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        String json = objectMapper.writeValueAsString(result);
-        response.getWriter().println(json);
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+//        String json = objectMapper.writeValueAsString(result);
+//        response.getWriter().println(json);
+        response.getWriter().println(resp.toJsonString());
     }
 }
