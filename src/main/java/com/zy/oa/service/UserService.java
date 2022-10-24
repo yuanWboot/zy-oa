@@ -2,6 +2,7 @@ package com.zy.oa.service;
 
 import com.zy.oa.entity.User;
 import com.zy.oa.mapper.UserMapper;
+import com.zy.oa.utils.Md5Utils;
 
 import javax.security.auth.login.LoginException;
 
@@ -20,7 +21,10 @@ public class UserService {
         User user = userMapper.selectByUsername(username);
         if (user == null){
             throw new LoginException("用户名不存在");
-        }if ( !password.equals(user.getPassword())){
+        }
+        //md5方式加密验证登录功能
+        String md5 = Md5Utils.md5Digest(password, user.getSalt());
+        if ( !md5.equals(user.getPassword())){
             throw new LoginException("密码错误");
         }
             return user;
