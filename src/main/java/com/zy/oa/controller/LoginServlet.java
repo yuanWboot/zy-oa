@@ -1,5 +1,9 @@
 package com.zy.oa.controller;
 
+import com.zy.oa.entity.User;
+import com.zy.oa.service.UserService;
+
+import javax.security.auth.login.LoginException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +13,7 @@ import java.io.IOException;
 
 @WebServlet("api/login")
 public class LoginServlet extends HttpServlet {
+    private UserService userService  = new UserService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -23,6 +28,11 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         //调用业务逻辑
+        try {
+            User user = userService.checkLogin(username, password);
+        } catch (LoginException e) {
+            e.printStackTrace();
+        }
         //返回json结果
     }
 }
