@@ -21,7 +21,7 @@ public class ResponseUtils {
         this.code = code;
         this.message = message;
     }
-    public ResponseUtils put(String key ,Object  value){
+        public ResponseUtils put(String key ,Object  value){
         this.date.put(key,value);
         return  this;
     }

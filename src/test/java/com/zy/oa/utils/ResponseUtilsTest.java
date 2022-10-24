@@ -12,4 +12,10 @@ public class ResponseUtilsTest {
         String  json =   resp.toJsonString();
         System.out.println(json);
     }
+
+    @Test
+    public void put2() {
+        System.out.println(new ResponseUtils("LoginException","密码错误").put("class","XXXClass").toJsonString());
+
+    }
 }
