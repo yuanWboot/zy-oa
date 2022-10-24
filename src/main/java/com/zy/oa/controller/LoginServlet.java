@@ -1,5 +1,7 @@
 package com.zy.oa.controller;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zy.oa.entity.User;
 import com.zy.oa.service.UserService;
 
@@ -43,5 +45,9 @@ public class LoginServlet extends HttpServlet {
             result.put("message",e.getMessage());
         }
         //返回json结果
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        String json = objectMapper.writeValueAsString(result);
+        response.getWriter().println(json);
     }
 }
