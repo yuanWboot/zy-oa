@@ -19,5 +19,10 @@ public class LoginServlet extends HttpServlet {
         //设置编码
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=utf-8");
+        //接收用户输入
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        //调用业务逻辑
+        //返回json结果
     }
 }
