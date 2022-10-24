@@ -11,12 +11,12 @@ public class UserServiceTest {
      private UserService userService = new UserService();
     @Test
     public void checkLogin1() throws LoginException {
-        User user = userService.checkLogin("test", "test");
+        User user = userService.checkLogin("m8", "test");
         System.out.println(user);
     }
     @Test
     public void checkLogin2() throws LoginException {
-        User user = userService.checkLogin("test1", "test");
+        User user = userService.checkLogin("m8", "test1");
         System.out.println(user);
     }
 

@@ -37,8 +37,12 @@ public class LoginServlet extends HttpServlet {
         ResponseUtils resp = null;
         try {
             User user = userService.checkLogin(username, password);
+            //将密码和盐值设置为空，屏蔽返回密码和盐值
+            user.setPassword(null);
+            user.setSalt(null);
             //处理结果编码，0代表成功，非零处理代表失败
             resp = new ResponseUtils().put("user",user);
+
 //            result.put("code",0);
 //            result.put("message","success");
         } catch (Exception e) {
