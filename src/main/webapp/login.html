@@ -39,7 +39,7 @@
             <el-input type="password" placeholder="请输入密码" v-model="form.password"></el-input>
         </el-form-item>
         <el-form-item>
-            <el-button type="primary" v-on:click="onsubmit('loginForm')" style="width: 200px">登录</el-button>
+            <el-button type="primary" v-on:click="onSubmit('loginForm')" style="width: 200px">登录</el-button>
         </el-form-item>
 
     </el-form>
@@ -69,6 +69,20 @@
                 form.validate((valid) => {
                     if (valid) {
                         console.info("表单检验成功，准备提交数据");
+                        const form = this.form;
+                        const $message = this.$message;
+                        const params = new URLSearchParams();
+                        params.append("username",form.username);
+                        params.append("password",form.password);
+                        axios.post("/api/login", params, {}).then(function (response) {
+                            console.info(response);
+                            const json = response.data;
+                            if(json.code == "0"){
+                                window.location.href = "/index.html"
+                            }else {
+                                $message.error({message: json.message,offset:100})
+                            }
+                        });
                     }
                 })
             }
