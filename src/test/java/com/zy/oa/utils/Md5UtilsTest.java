@@ -11,4 +11,10 @@ public class Md5UtilsTest {
         String md5 = Md5Utils.md5Digest("123456");
         System.out.println(md5);
     }
+
+    @Test
+    public void testMd5Digest() {
+        String md5 = Md5Utils.md5Digest("123456",666);
+        System.out.println(md5);
+    }
 }
