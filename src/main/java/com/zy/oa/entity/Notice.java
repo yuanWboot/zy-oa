@@ -7,15 +7,12 @@ public class Notice {
     private Long receiverId;
     private String content;
     private Date createTime;
-    public Notice(){
 
-    }
-    public Notice(Long receiverId , String content){
+    public  Notice(Long receiverId,String content){
         this.receiverId = receiverId;
         this.content = content;
         this.createTime = new Date();
-    }
-
+    };
     @Override
     public String toString() {
         return "Notice{" +
@@ -57,5 +54,4 @@ public class Notice {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-
 }
