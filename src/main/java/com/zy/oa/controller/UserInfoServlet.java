@@ -1,6 +1,7 @@
 package com.zy.oa.controller;
 
 import com.zy.oa.entity.Node;
+import com.zy.oa.service.EmployeeService;
 import com.zy.oa.service.RbacService;
 import com.zy.oa.utils.ResponseUtils;
 
@@ -18,6 +19,7 @@ import java.util.Map;
 @WebServlet("/api/user_info")
 public class UserInfoServlet extends HttpServlet {
     private RbacService rbacService = new RbacService();
+    private EmployeeService employeeService = new EmployeeService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        //从前端获取到uid
