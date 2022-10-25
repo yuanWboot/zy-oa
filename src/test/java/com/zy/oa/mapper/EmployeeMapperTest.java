@@ -30,7 +30,18 @@ public class EmployeeMapperTest {
         MyBatisUtils.executeQuery(sqlSession -> {
             EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
             List<Employee> employees = employeeMapper.selectByParams(params);
-            System.out.println(employees.toString());
+            System.out.println(employees);
+            return employees;
+        });
+    }
+    @Test
+    public void selectByParams2() {
+        Map params = new HashMap<>();
+        params.put("level",8);
+        MyBatisUtils.executeQuery(sqlSession -> {
+            EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            List<Employee> employees = employeeMapper.selectByParams(params);
+            System.out.println(employees);
             return employees;
         });
     }
