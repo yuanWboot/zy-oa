@@ -1,5 +1,6 @@
 package com.zy.oa.controller;
 
+import com.zy.oa.entity.Employee;
 import com.zy.oa.entity.Node;
 import com.zy.oa.service.EmployeeService;
 import com.zy.oa.service.RbacService;
@@ -24,6 +25,7 @@ public class UserInfoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        //从前端获取到uid
         String uid = request.getParameter("uid");
+        String eid = request.getParameter("eid");
         //根据uid查询到所有功能模块
         List<Node> nodes = rbacService.selectNodeByUserId(Long.parseLong(uid));
         //功能模块树形结构
@@ -47,8 +49,10 @@ public class UserInfoServlet extends HttpServlet {
                 children.add(node);
             }
         }
+
         //转换成json数据结构
-        String json = new ResponseUtils().put("nodeList", treeList).toJsonString();
+        Employee employee = employeeService.selectById(Long.parseLong(eid));
+        String json = new ResponseUtils().put("nodeList", treeList).put("employee",employee).toJsonString();
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().println(json);
 
