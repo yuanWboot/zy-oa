@@ -28,5 +28,6 @@
         <mapper resource="mappers/user.xml"></mapper>
         <mapper resource="mappers/rbac.xml"></mapper>
         <mapper resource="mappers/employee.xml"></mapper>
+        <mapper resource="mappers/leave_form.xml"></mapper>
     </mappers>
 </configuration>
