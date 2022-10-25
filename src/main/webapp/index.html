@@ -36,7 +36,11 @@
                         <i class="el-icon-s-check" style="font-size: 18px;margin-right: 15px">
                             <span style="margin-right: 15px">{{employee.name}}{{[employee.title]}}</span>
                         </i>
-                        <temple></temple>
+                      <template #dropdown>
+                          <el-dropdown-menu>
+                              <el-dropdown-item v-on:click="logout">注销</el-dropdown-item>
+                          </el-dropdown-menu>
+                      </template>
                     </el-dropdown>
                 </el-col>
             </el-row>
@@ -76,6 +80,10 @@
         ,methods: {
             showPage(url){
                 document.getElementById("main").src = url;
+            }
+            ,logout() {
+                sessionStorage.clear();
+                window.location.href ="/index.html";
             }
 
         }
