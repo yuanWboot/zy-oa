@@ -11,7 +11,7 @@ public class ProcessFlow {
     private String reason; //审批意见
     private Date createTime;//创建时间
     private Date auditTime; //审批时间
-    private  Integer orderNp;//任务序号
+    private  Integer orderNo;//任务序号
     private String  state; //ready 准备  process 正在处理 complete 处理完成 cancel 取消
     private Integer isLast; //是否最后节点 0否1是
 
@@ -27,7 +27,7 @@ public class ProcessFlow {
                 ", reason='" + reason + '\'' +
                 ", createTime=" + createTime +
                 ", auditTime=" + auditTime +
-                ", orderNp=" + orderNp +
+                ", orderNp=" + orderNo +
                 ", state='" + state + '\'' +
                 ", isLast=" + isLast +
                 '}';
@@ -97,12 +97,12 @@ public class ProcessFlow {
         this.auditTime = auditTime;
     }
 
-    public Integer getOrderNp() {
-        return orderNp;
+    public Integer getOrderNo() {
+        return orderNo;
     }
 
-    public void setOrderNp(Integer orderNp) {
-        this.orderNp = orderNp;
+    public void setOrderNo(Integer orderNo) {
+        this.orderNo = orderNo;
     }
 
     public String getState() {
