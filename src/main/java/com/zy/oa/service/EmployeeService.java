@@ -13,4 +13,19 @@ public class EmployeeService {
         });
         return employee;
     }
+    public Employee selectLeader(Long employeeId){
+        MyBatisUtils.executeQuery(sqlSession -> {
+            EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            Employee employee = employeeMapper.selectById(employeeId);
+            if (employee.getLevel()>7){
+                //查询部门经理
+            }else if(employee.getLevel() == 7){
+                //查询总经理
+            }else if (employee.getLevel() == 8){
+                //返回自己
+            }
+            return null;
+        });
+        return null;
+    }
 }
