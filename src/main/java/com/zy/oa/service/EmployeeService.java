@@ -18,12 +18,12 @@ public class EmployeeService {
         return employee;
     }
     public Employee selectLeader(Long employeeId){
-        MyBatisUtils.executeQuery(sqlSession -> {
+        Employee l  = (Employee)MyBatisUtils.executeQuery(sqlSession -> {
             EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
             Employee employee = employeeMapper.selectById(employeeId);
             Map params = new HashMap<>();
             Employee leader = null;
-            if (employee.getLevel()>7){
+            if (employee.getLevel()<7){
                 //查询部门经理
                 params.put("level",7);
                 params.put("department",employee.getDepartmentId());
@@ -38,8 +38,8 @@ public class EmployeeService {
                 //返回自己
                 leader = employee;
             }
-            return null;
+            return leader;
         });
-        return null;
+        return l;
     }
 }

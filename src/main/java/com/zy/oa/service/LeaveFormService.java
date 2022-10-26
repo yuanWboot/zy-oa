@@ -8,6 +8,7 @@ import com.zy.oa.mapper.LeaveFormMapper;
 import com.zy.oa.mapper.ProcessFlowMapper;
 import com.zy.oa.utils.MyBatisUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class LeaveFormService {
@@ -42,6 +43,7 @@ public class LeaveFormService {
             flow1.setState("complete");
             flow1.setIsLast(0);
             processFlowMapper.insert(flow1);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH时");
 //        3.分情况创建其余数据流程
 //        3.1 7级以下员工，生成部门经理审批任务，请假时间大于72小时，还需要生成总经理审批任务
             if (employee.getLevel() < 7 ){
@@ -54,14 +56,14 @@ public class LeaveFormService {
                 flow2.setOrderNo(2);
                 flow2.setState("process");
                 long diff = form.getEndTime().getTime() - form.getStartTime().getTime();
-                float hours = diff / (1000 * 60 * 60) * 1l;
+                float hours = diff/(1000 * 60 * 60) * 1f;
                 if (hours >= 72){
                     flow2.setIsLast(0);
                     processFlowMapper.insert(flow2);
-                    Employee manager = employeeService.selectLeader(employee.getEmployeeId());
+                    Employee manager = employeeService.selectLeader(dmanager.getEmployeeId());
                     ProcessFlow flow3 = new ProcessFlow();
                     flow3.setFormId(form.getFormId());
-                    flow3.setOperatorId(dmanager.getEmployeeId());
+                    flow3.setOperatorId(manager.getEmployeeId());
                     flow3.setAction("audit");
                     flow3.setCreateTime(new Date());
                     flow3.setOrderNo(3);
