@@ -10,7 +10,7 @@ import java.util.Map;
 public class ResponseUtils {
     private String code;
     private String message;
-    private Map date = new LinkedHashMap<>();
+    private Map data = new LinkedHashMap<>();
 
     public ResponseUtils() {
         this.code = "0";
@@ -22,7 +22,7 @@ public class ResponseUtils {
         this.message = message;
     }
         public ResponseUtils put(String key ,Object  value){
-        this.date.put(key,value);
+        this.data.put(key,value);
         return  this;
     }
 
@@ -42,12 +42,12 @@ public class ResponseUtils {
         this.message = message;
     }
 
-    public Map getDate() {
-        return date;
+    public Map getData() {
+        return data;
     }
 
-    public void setDate(Map date) {
-        this.date = date;
+    public void setData(Map data) {
+        this.data = data;
     }
     public String toJsonString() {
         ObjectMapper objectMapper = new ObjectMapper();

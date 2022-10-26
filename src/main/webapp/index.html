@@ -95,11 +95,11 @@
             .then(function (response){
                 const json = response.data;
                 console.log(json);
-                json.date.nodeList.forEach(function (item){
+                json.data.nodeList.forEach(function (item){
                     objApp.nodeList.push(item);
                 })
                 console.info(objApp.nodeList);
-                objApp.employee = json.date.employee;
+                objApp.employee = json.data.employee;
             })
         }
     };
