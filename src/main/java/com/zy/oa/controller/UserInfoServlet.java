@@ -1,7 +1,9 @@
 package com.zy.oa.controller;
 
+import com.zy.oa.entity.Department;
 import com.zy.oa.entity.Employee;
 import com.zy.oa.entity.Node;
+import com.zy.oa.service.DepartmentService;
 import com.zy.oa.service.EmployeeService;
 import com.zy.oa.service.RbacService;
 import com.zy.oa.utils.ResponseUtils;
@@ -21,6 +23,7 @@ import java.util.Map;
 public class UserInfoServlet extends HttpServlet {
     private RbacService rbacService = new RbacService();
     private EmployeeService employeeService = new EmployeeService();
+    private DepartmentService departmentService = new DepartmentService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        //从前端获取到uid
@@ -52,7 +55,9 @@ public class UserInfoServlet extends HttpServlet {
 
         //转换成json数据结构
         Employee employee = employeeService.selectById(Long.parseLong(eid));
-        String json = new ResponseUtils().put("nodeList", treeList).put("employee",employee).toJsonString();
+        Department department = departmentService.selectById(employee.getDepartmentId());
+        String json = new ResponseUtils()
+                .put("nodeList", treeList).put("employee",employee).put("department",department).toJsonString();
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().println(json);
 
@@ -60,6 +65,6 @@ public class UserInfoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 }
