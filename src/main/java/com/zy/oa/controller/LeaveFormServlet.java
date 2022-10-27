@@ -48,6 +48,7 @@ public class LeaveFormServlet extends HttpServlet {
         String reason = request.getParameter("reason");
         LeaveForm form = new LeaveForm();
         form.setEmployeeId(Long.parseLong(eid));
+        form.setFormType(Integer.parseInt(formType));
         form.setStartTime(new Date(Long.parseLong(startTime)));
         form.setEndTime(new Date(Long.parseLong(endTime)));
         form.setReason(reason);
