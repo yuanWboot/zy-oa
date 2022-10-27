@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
-@WebServlet("/api/leave/**")
+@WebServlet("/api/leave/*")
 public class LeaveFormServlet extends HttpServlet {
     private LeaveFormService leaveFormService = new LeaveFormService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    this.doPost(request,response);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class LeaveFormServlet extends HttpServlet {
         String uri = request.getRequestURI();
         String methodName = uri.substring(uri.lastIndexOf("/") + 1);
         if (methodName.equals("create")){
-            this.creat(request,response);
+            this.create(request,response);
         }else if (methodName.equals("list")){
 
         }else if (methodName.equals("audit")){
@@ -38,29 +38,29 @@ public class LeaveFormServlet extends HttpServlet {
 
     }
 
-    public void creat(HttpServletRequest request,HttpServletResponse response) throws IOException {
-
-        String eid = request.getParameter("eid");
+    public void create(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String strEmployeeId = request.getParameter("eid");
         String formType = request.getParameter("formType");
-        //从1970年获取到现在的毫秒数
+        //从1970年到现在的毫秒数
         String startTime = request.getParameter("startTime");
         String endTime = request.getParameter("endTime");
         String reason = request.getParameter("reason");
         LeaveForm form = new LeaveForm();
-        form.setEmployeeId(Long.parseLong(eid));
-        form.setFormType(Integer.parseInt(formType));
+        form.setEmployeeId(Long.parseLong(strEmployeeId));
         form.setStartTime(new Date(Long.parseLong(startTime)));
         form.setEndTime(new Date(Long.parseLong(endTime)));
+        form.setFormType(Integer.parseInt(formType));
         form.setReason(reason);
         form.setCreateTime(new Date());
         ResponseUtils resp = null;
         try {
             leaveFormService.createLeaveForm(form);
             resp = new ResponseUtils();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            resp = new ResponseUtils(e.getClass().getSimpleName(),e.getMessage());
+            resp = new ResponseUtils(e.getClass().getSimpleName(), e.getMessage());
         }
+
         response.getWriter().println(resp.toJsonString());
     }
 
