@@ -38,7 +38,7 @@ public class LeaveFormServlet extends HttpServlet {
 
     }
 
-    public void creat(HttpServletRequest request,HttpServletResponse response){
+    public void creat(HttpServletRequest request,HttpServletResponse response) throws IOException {
 
         String eid = request.getParameter("eid");
         String formType = request.getParameter("formType");
@@ -61,7 +61,8 @@ public class LeaveFormServlet extends HttpServlet {
             e.printStackTrace();
             resp = new ResponseUtils(e.getClass().getSimpleName(),e.getMessage());
         }
-
+        response.getWriter().println(resp.toJsonString());
     }
+
 }
 

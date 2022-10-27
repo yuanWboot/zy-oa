@@ -30,7 +30,7 @@
     <el-form ref="leaveForm" :model="form" :rules="rules" label-width="80px">
         <el-descriptions title="请假申请单" :column="1" border>
             <el-descriptions-item label="部门">研发部</el-descriptions-item>
-            <el-descriptions-item label="申请人">王美美[高级研发工程师]
+            <el-descriptions-item label="申请人">{{employee.name}}[{{employee.title}}]
             </el-descriptions-item>
             <el-descriptions-item label="请假类型">
 
@@ -76,13 +76,14 @@
     var Main = {
         data() {
             return {
+                employee:{},
                 form: {
                     formType: "1",
                     timeRange: "",
                     startTime: "",
                     endTime: "",
                     reason: "",
-                    eid: "",
+                    eid: ""
                 },
                 // 表单验证，需要在 el-form-item 元素中增加 prop 属性
                 rules: {
@@ -94,6 +95,14 @@
                     ]
                 }
             }
+        }
+        ,mounted(){
+            const objApp = this;
+            axios.get("/api/user_info?uid=" + sessionStorage.uid + "&eid=" + sessionStorage.eid)
+                .then(function(response){
+                    console.info(response);
+                    objApp.employee = response.data.data.employee;
+                })
         }
     };
     ElementPlus.locale(ElementPlus.lang.zhCn);
