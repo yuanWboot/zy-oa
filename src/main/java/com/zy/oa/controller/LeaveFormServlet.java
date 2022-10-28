@@ -26,20 +26,17 @@ public class LeaveFormServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=utf-8");
-        //    http://localhost/api/leave/create
-
+        //http://localhost/api/leave/create
         String uri = request.getRequestURI();
         String methodName = uri.substring(uri.lastIndexOf("/") + 1);
-        if (methodName.equals("create")){
-            this.create(request,response);
-        }else if (methodName.equals("list")){
-
-        }else if (methodName.equals("audit")){
-
+        if (methodName.equals("create")) {
+            this.create(request, response);
+        } else if (methodName.equals("list")) {
+            this.list(request, response);
+        } else if (methodName.equals("audit")) {
+            this.audit(request, response);
         }
-
     }
-
     public void create(HttpServletRequest request,HttpServletResponse response) throws IOException {
         String strEmployeeId = request.getParameter("eid");
         String formType = request.getParameter("formType");
@@ -77,7 +74,20 @@ public class LeaveFormServlet extends HttpServlet {
         }
         response.getWriter().println(resp.toJsonString());
     }
-
-
+    public void audit(HttpServletRequest request ,HttpServletResponse response) throws IOException {
+        String formId = request.getParameter("formId");
+        String result = request.getParameter("result");
+        String reason = request.getParameter("reason");
+        String eid = request.getParameter("eid");
+        ResponseUtils resp = null;
+        try {
+            leaveFormService.audit(Long.parseLong(formId), Long.parseLong(eid), result, reason);
+            resp = new ResponseUtils();
+        }catch (Exception e){
+            e.printStackTrace();
+            resp = new ResponseUtils(e.getClass().getSimpleName(), e.getMessage());
+        }
+        response.getWriter().println(resp.toJsonString());
+    }
 }
 
