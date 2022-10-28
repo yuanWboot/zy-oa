@@ -10,6 +10,8 @@ import com.zy.oa.utils.MyBatisUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public class LeaveFormService {
 
@@ -106,5 +108,19 @@ public class LeaveFormService {
             return form;
         });
         return f;
+    }
+
+    /**
+     * 获取指定任务状态及指定人的请假单列表
+     * @param pfState ProcessFlow任务状态
+     * @param operatorId 经办人编号
+     * @return 请假单及相关参数列表
+     */
+    public List<Map> getLeaveFormList(String pfState ,Long operatorId){
+        return (List<Map>) MyBatisUtils.executeQuery(sqlSession -> {
+            LeaveFormMapper leaveFormMapper = sqlSession.getMapper(LeaveFormMapper.class);
+            List<Map> maps = leaveFormMapper.selectByParams(pfState, operatorId);
+            return maps;
+        });
     }
 }
