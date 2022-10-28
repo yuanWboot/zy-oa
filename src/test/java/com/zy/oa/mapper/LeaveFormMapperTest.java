@@ -41,10 +41,10 @@ public class LeaveFormMapperTest {
     }
 
     @Test
-    public void selectByParams() {
+    public void testSelectByParams(){
         MyBatisUtils.executeQuery(sqlSession -> {
-            LeaveFormMapper leaveFormMapper = sqlSession.getMapper(LeaveFormMapper.class);
-            List<Map> list = leaveFormMapper.selectByParams("process", 2l);
+            LeaveFormMapper mapper = sqlSession.getMapper(LeaveFormMapper.class);
+            List<Map> list = mapper.selectByParams("process", 2l);
             System.out.println(list);
             return list;
         });

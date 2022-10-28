@@ -11,14 +11,14 @@ public class DruidDataSourceFactory extends UnpooledDataSourceFactory {
     public DataSource getDataSource() {
         try {
             ((DruidDataSource)this.dataSource).init();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException throwables) {
+            throw new RuntimeException(throwables);
         }
         return this.dataSource;
     }
 
-    public DruidDataSourceFactory() {
+    public DruidDataSourceFactory(){
         this.dataSource = new DruidDataSource();
     }
-}
 
+}
